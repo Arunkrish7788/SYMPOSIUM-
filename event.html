@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technologia 25 Symposium Events</title>
+  <style>
+    /* Custom Variables */
+    :root {
+      --font-size: 14px;
+      --gradient-primary: linear-gradient(135deg, #f59e0b, #ef4444); /* Yellow to Red */
+      --gradient-secondary: linear-gradient(135deg, #fcd34d, #f97316); /* Lighter Yellow to Orange */
+      --glass-bg: rgba(255, 255, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    }
+
+    /* Glass morphism effect */
+    .glass {
+      backdrop-filter: blur(16px);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+    }
+
+    .glass-nav {
+      backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+    }
+
+    .glass-nav.scrolled {
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Animations */
+    @keyframes blob {
+      0% { transform: translate(0px, 0px) scale(1); }
+      33% { transform: translate(30px, -50px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
+      100% { transform: translate(0px, 0px) scale(1); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .animate-blob {
+      animation: blob 7s infinite;
+    }
+
+    .animation-delay-2000 {
+      animation-delay: 2s;
+    }
+
+    .animation-delay-4000 {
+      animation-delay: 4s;
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .animate-scale-in {
+      animation: scaleIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Custom styles */
+    .gradient-text {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.05);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .scroll-smooth {
+      scroll-behavior: smooth;
+    }
+
+    /* Hide scrollbar */
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Mobile menu styles */
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    /* Form styles */
+    .form-input {
+      backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus {
+      border-color: #f59e0b;
+      box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+      outline: none;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(239, 68, 68, 0.3);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(239, 68, 68, 0.5);
+    }
+
+    /* Timeline styles */
+    .timeline-line::before {
+      content: '';
+      position: absolute;
+      left: 32px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--gradient-primary);
+    }
+
+    .timeline-node {
+      position: absolute;
+      left: 24px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 4px solid white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Responsive utilities */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+
+    /* Print styles */
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Original styles with enhancements */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fdfadb; /* Yellow background */
+      color: #2c2c2c;
+    }
+
+    header {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      margin-top: 40px;
+      color: #b71c1c;
+      border-left: 4px solid #b71c1c;
+      padding-left: 15px;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .event-card {
+      background: white;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    .event-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .event-card h3 {
+      margin-top: 0;
+      color: #d32f2f;
+      border-bottom: 2px solid #fdfadb;
+      padding-bottom: 10px;
+    }
+
+    .buttons {
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .buttons a {
+      display: inline-block;
+      margin: 10px;
+      padding: 14px 28px;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      color: white;
+      background: var(--gradient-primary);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .buttons a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>TECHNOLOGIA'25 Symposium Events</h1>
+  </header>
+
+  <div class="container">
+    <h2>Technical Event 1</h2>
+    <div class="event-card">
+      <h3>Paper Presentation 📑🎤</h3>
+      <p><strong>Time:</strong> 11:15 AM – 12:15 PM</p>
+      <p><strong>Description:</strong>The Paper Presentation event provides a platform for students and researchers to showcase their innovative ideas, research findings, and academic projects. Participants are expected to present their papers on a chosen topic in a clear, concise, and engaging manner. The event encourages analytical thinking, effective communication, and scholarly discussion.<br><br></p>
+      <strong>Per Team 1 or 2 members only <br></strong>
+      <strong><p>Participants will be judged on:</p></strong>
+      <ul>
+        <li>Content Quality: Relevance, originality, and depth of research.</li>
+        <li>Presentation Skills: Clarity, confidence, and engagement with the audience.</li>
+        <li>Visual Aids: Effective use of slides, charts, and diagrams to support the presentation.</li>
+        <li>Q&A Response: Ability to answer questions and justify findings convincingly.</li>
+      </ul>
+      <p>This event is an excellent opportunity to gain recognition, receive constructive feedback, and network with peers and experts in the field.</p>
+    </div>
+    <div class="event-card">
+      <h3>Web Designing 💻🎨</h3>
+      <p><strong>Time:</strong> 11:15 AM – 12:15 PM</p>
+      <p><strong>Description</strong>: The Web Designing event focuses on the principles of creating visually appealing and user-friendly websites. Participants will learn about HTML, CSS, and JavaScript, and will have the opportunity to design their own web pages. This hands-on workshop encourages creativity and technical skills.</p><br><br>
+      <strong>Tools:Offline Tools only</strong> <br><strong>Per Team 1 or 2 members only <br> Topic: Onspot</strong>
+    </div>
+
+    <h2>Technical Event 2</h2>
+    <div class="event-card">
+      <h3>Quiz 🧠✨</h3>
+      <p><strong>Time:</strong> 12:20 PM – 01:10 PM</p>
+      <p><strong>Description:</strong> The Quiz event tests participants' knowledge on various topics through a series of questions. It encourages quick thinking and teamwork, as participants can form teams to compete against each other.</p>
+      <p>This Event contains 2 Rounds every participants mark will be considered for the next round after the first round some teams are filtered and allowed to play in  Round 2  </p>
+      <p>The questions will be on Basic Fundamentals of computer and in some programing Language,such as C,Python,Java,OS,DBMS</p>
+      <strong>Participants will be judged on:</strong><br>
+       Accuracy: Correctly identifying or completing the answer.<br>
+       Speed: Quick and confident responses.<br>
+      </div>
+    <div class="event-card">
+      <h3>Code Relay</h3>
+      <p><strong>Time:</strong> 12:20 PM – 01:10 PM</p><br>
+      <p><strong>Description:</strong> A team-based coding competition where participants work together to solve programming challenges in a relay format. The questions are based on C and Python languages.<br><br>
+      <strong>Judging Criteria:</strong><br>
+
+Accuracy: Correctness of the final program.<br>
+
+Team Coordination: Smooth handover between teammates.<br>
+
+Logic & Efficiency: Quality of code, optimization, and problem-solving approach.<br>
+
+Time Management: Completing the challenge within the given time.<br>
+
+This event is all about speed, strategy, and coding synergy — where collaboration and quick thinking are the keys to winning!</p>
+    </div>
+
+    <h2>Non-Technical Event 1</h2>
+    <div class="event-card">
+      <h3>Fireball🔥⚽</h3>
+      <p><strong>Time:</strong> 1:20 PM – 01:55 PM</p>
+
+      <p><strong>Description:</strong><p>The Fireball event is an exhilarating non-technical competition that tests participants' creativity, quick thinking, and teamwork. In this event, teams will be given a series of challenges that require them to come up with innovative solutions using limited resources and time.<br>
+
+<strong>Participants will be judged on:<br></strong>
+
+Creativity: Originality and inventiveness in problem-solving.<br>
+
+Teamwork: Collaboration and communication within the team.<br>
+
+Execution: Effectiveness and efficiency in implementing the solution.<br>
+
+Get ready for a fast-paced, action-packed event that will ignite your imagination and challenge your skills!</p><br>
+    </div>
+
+    <div class="event-card">
+      <h3>Treasure Hunt 🗝️</h3>
+      <p><strong>Time:</strong> 01:20 PM – 01:55 PM</p>
+      <p><strong>Venue:</strong> College Ground</p>
+      <p><strong>Description:</strong> The Treasure Hunt is one of the most thrilling non-technical events of the symposium, designed to test participants’ teamwork, problem-solving ability, and quick thinking. Teams will follow a series of clues, riddles, and hidden tasks spread across the venue to reach the ultimate treasure.<br><br>
+
+<strong>Participants will be judged on:<br></strong>
+
+Teamwork: Coordination and collaboration among team members.<br>
+
+Problem-Solving: Ability to crack riddles and puzzles efficiently.<br>
+
+Speed & Strategy: Completing the hunt within the shortest time possible.<br>
+
+Get ready for an adventurous challenge where fun meets intelligence, and only the sharpest minds can claim the treasure!</p><br>
+    </div>
+
+    <h2>Non-Technical Event 2</h2>
+    <div class="event-card">
+      <h3>Dialogue Finding 🎬🗣️</h3>
+      <p><strong>Time:</strong> 03:10 PM – 03:40 PM</p>
+      
+      <p><strong>Description:</strong>The Dialogue Finding event is a fun and exciting non-technical competition that puts your memory, presence of mind, and movie knowledge to the test! Participants will be given popular dialogues from movies, series, or dramas — and they must quickly identify the movie/character or complete the missing dialogue.<br>
+
+<strong>Participants will be judged on:<br></strong>
+
+Accuracy: Correctly identifying or completing the dialogue.<br>
+
+Speed: Quick and confident responses.<br>
+
+Entertainment Factor: Engaging and enthusiastic participation.<br>
+
+This event guarantees lots of fun, laughter, and nostalgia while testing how well you know your favorite movie lines!</p><br>
+</div>    
+<div class="event-card">
+      <h3>BGM Round 🎶🎶</h3>
+      <p><strong>Time:</strong> 03:10 PM – 03:40 PM</p>
+      <p><strong>Description:</strong>  The BGM Round is a fun-filled, non-technical event designed to test your presence of mind, listening skills, and creativity. In this round, participants will listen to short background music tracks from movies, series, advertisements, or trending songs and identify them within the given time.<br><br>
+
+<strong>Participants will be judged on:<br></strong>
+
+Accuracy: Correctly identifying the track or source.<br>
+
+Speed: How quickly the answer is given.<br>
+
+Presence of Mind: Handling tricky or remix versions confidently.<br>
+
+This event guarantees entertainment, laughter, and excitement while putting your music knowledge to the test!</p><br>
+    </div>
+    <div class="buttons">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScCrImW8v32gTzQogPszsm93ihUf8jV6GMcwTWm45VlfjjPBA/viewform?usp=sharing&ouid=108382268750784309688">Register</a>
+      <a href="index.html">Back to Home</a>
+    </div>
+  </div>
+
+</body>
+</html>
